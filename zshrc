@@ -133,6 +133,10 @@ export YANDEX_BUILD=~/yandex-build
 export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" \
     -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # -------------------------------------------------------------------------------------------------------------------------
 # section for ssh key forwarding
 #
