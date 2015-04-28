@@ -97,6 +97,9 @@ alias -g DD='>/dev/null'
 alias -g math="rlwrap /Applications/Mathematica.app/Contents/MacOS/MathKernel"
 alias -g diffs="hg st | sed -nE 's/^[MARC] //p' | xargs -I {} hg di {}"
 
+alias ya='~/devel/arcadia/devtools/ya/ya'
+alias ya-dev='~/devel/arcadia/devtools/ya-dev/ya'
+
 # -------------------------------------------------------------------------------------------------------------------------
 mkcd () {
     mkdir -p "$@" && cd "$@";
