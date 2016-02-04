@@ -15,7 +15,7 @@ files=$(ls -1)
 
 copy_cmd() {
     from_file="$1"
-    if [ "$to" == localhost ]; then
+    if [ "$to" = localhost ]; then
         to_file="$HOME/.$from_file"
         rm -rf "$to_file"
         ln -s "$PWD/$from_file" "$to_file"
