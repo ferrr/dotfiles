@@ -4,7 +4,7 @@ set t_Co=256
 colors delek
 
 " set number
-hi LineNr ctermfg=darkgray ctermbg=gray
+"hi LineNr ctermfg=darkgray ctermbg=gray
 
 hi StatusLine ctermfg=white ctermbg=darkgray
 
@@ -69,7 +69,9 @@ function! SetCursorPosition()
     end
 endfunction
 
-call pathogen#infect()                                            " easy install plugins
+if !exists("g:ya_vim#src_dir")
+    call pathogen#infect()                                            " easy install plugins
+endif
 
 " disable arrow keys
 map <up> <nop>
@@ -80,28 +82,3 @@ imap <up> <nop>
 imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
-
-if has("gui_macvim")
-    set gfn=Consolas:h12
-    colors molokai
-    set transparency=5
-    set nonu
-    "set fu
-    set guioptions-=T
-    set guioptions-=m
-    set guioptions-=l
-    set guioptions-=r
-    set guioptions-=b
-    set guioptions-=t
-    set go-=L
-    noremap <M-Enter> :set invfullscreen<CR>
-    set columns=130
-    set lines=40
-
-    " switch to russian layout F12
-    set keymap=russian-jcukenwin
-    set iminsert=0
-    imap <F12> 
-    cmap <F12> 
-endif
-
