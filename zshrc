@@ -82,6 +82,7 @@ alias less='less -R'
 export LSCOLORS=exfxcxdxcxegedabagacad
 alias grep='grep --color'
 alias bc='bc -lq'
+alias vim='~/devel/arcadia/devtools/ya/ya vim'
 
 alias .='cd ../'
 alias ..='cd ../../'
