@@ -82,7 +82,7 @@ alias less='less -R'
 export LSCOLORS=exfxcxdxcxegedabagacad
 alias grep='grep --color'
 alias bc='bc -lq'
-alias vim='~/devel/arcadia/devtools/ya/ya vim'
+alias vim='~/devel/arcadia/ya vim'
 
 alias .='cd ../'
 alias ..='cd ../../'
@@ -94,12 +94,12 @@ alias json='python -mjson.tool'
 alias xml='xmllint --format --encode utf8 --nonet -'
 alias -g L="| less"
 alias -g DD='>/dev/null'
+alias A='cd ~/devel/arcadia'
 
 alias -g math="rlwrap /Applications/Mathematica.app/Contents/MacOS/MathKernel"
 alias -g diffs="hg st | sed -nE 's/^[MARC] //p' | xargs -I {} hg di {}"
 
-alias ya='~/devel/arcadia/devtools/ya/ya'
-alias ya-dev='~/devel/arcadia/devtools/ya-dev/ya'
+alias ya='~/devel/arcadia/ya'
 
 # -------------------------------------------------------------------------------------------------------------------------
 mkcd () {
