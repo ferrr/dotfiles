@@ -47,17 +47,24 @@ setopt prompt_subst
 # Formats
 VCS_FORMAT="%{$fg[yellow]%}%b%{$reset_color%} "
 
+function git_prompt_info() {
+  # prove that you can do better
+}
+
 zstyle ':vcs_info:*' enable git hg svn
 zstyle ':vcs_info:*' formats $VCS_FORMAT
 
 precmd () {
     vcs_info 2>/dev/null
+    source ~/devel/arcadia/devtools/scmprompt/scmprompt.zsh
+    updateVcsInfo
 
-    PS1_STR=""
-    PS1_STR="${PS1_STR}%{$fg[blue]%}%n%{$reset_color%}@"  #user
-    PS1_STR="${PS1_STR}%{$fg[green]%}%m%{$reset_color%}" #hostname
-    PS1_STR="${PS1_STR}[%{$reset_color%}%{$fg[blue]%}%~%{$reset_color%}]" #folder
-    PS1_STR="${PS1_STR}${vcs_info_msg_0_} "
+
+#    PS1_STR=""
+#    PS1_STR="${PS1_STR}%{$fg[blue]%}%n%{$reset_color%}@"  #user
+#    PS1_STR="${PS1_STR}%{$fg[green]%}%m%{$reset_color%}" #hostname
+#    PS1_STR="${PS1_STR}[%{$reset_color%}%{$fg[blue]%}%~%{$reset_color%}]" #folder
+#    PS1_STR="${PS1_STR}${vcs_info_msg_0_} "
 
     TITLE="%m:%~"
     print -Pn "\033];$TITLE\007"
