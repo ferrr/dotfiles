@@ -56,9 +56,11 @@ zstyle ':vcs_info:*' formats $VCS_FORMAT
 
 precmd () {
     vcs_info 2>/dev/null
-    source ~/devel/arcadia/devtools/scmprompt/scmprompt.zsh
-    updateVcsInfo
-
+    SCM_FILE=$HOME/devel/arcadia/devtools/scmprompt/scmprompt.zsh
+    if [[ -f "$SCM_FILE" ]]; then
+        source $SCM_FILE
+        updateVcsInfo
+    fi
 
 #    PS1_STR=""
 #    PS1_STR="${PS1_STR}%{$fg[blue]%}%n%{$reset_color%}@"  #user
