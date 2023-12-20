@@ -1,4 +1,29 @@
-# key bindings
+autoload -U compinit && compinit
+autoload -U colors && colors
+
+setopt autocd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt auto_resume
+setopt nobeep
+
+setopt extendedglob
+setopt append_history
+setopt share_history
+setopt histignorealldups
+
+# Needs to be enabled for the prompt to change
+setopt prompt_subst
+
+HISTFILE=~/.zsh-histfile
+HISTSIZE=10000
+SAVEHIST=10000
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# key bindings ------------------------------------------------------------------------------------------------------------
 bindkey -v
 
 bindkey '^R' history-incremental-search-backward
@@ -16,159 +41,144 @@ insert-last-command-output() {
 
 zle -N insert-last-command-output
 bindkey "^K" insert-last-command-output
-
 # -------------------------------------------------------------------------------------------------------------------------
-autoload -U compinit
-compinit
 
-autoload -U colors && colors
-
-#setopt correctall
-setopt autocd
-setopt auto_pushd
-setopt pushd_ignore_dups
-setopt auto_resume
-setopt nobeep
-
-setopt extendedglob
-setopt append_history share_history histignorealldups
-
-zstyle ':completion:*' menu select
-zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
-zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
-zstyle ':completion:*:default'         list-colors ${(s.:.)LS_COLORS}
-
-
-autoload -Uz vcs_info
-
-# Needs to be enabled for the prompt to change
-setopt prompt_subst
-
-# Formats
-VCS_FORMAT="%{$fg[yellow]%}%b%{$reset_color%} "
-
-function git_prompt_info() {
-  # prove that you can do better
-}
-
-zstyle ':vcs_info:*' enable git hg svn
-zstyle ':vcs_info:*' formats $VCS_FORMAT
-
-precmd () {
-    vcs_info 2>/dev/null
-    SCM_FILE=$HOME/devel/arcadia/devtools/scmprompt/scmprompt.zsh
-    if [[ -f "$SCM_FILE" ]]; then
-        source $SCM_FILE
-        updateVcsInfo
-    fi
-
-#    PS1_STR=""
-#    PS1_STR="${PS1_STR}%{$fg[blue]%}%n%{$reset_color%}@"  #user
-#    PS1_STR="${PS1_STR}%{$fg[green]%}%m%{$reset_color%}" #hostname
-#    PS1_STR="${PS1_STR}[%{$reset_color%}%{$fg[blue]%}%~%{$reset_color%}]" #folder
-#    PS1_STR="${PS1_STR}${vcs_info_msg_0_} "
-
-    TITLE="%m:%~"
-    print -Pn "\033];$TITLE\007"
-}
-
-#export PS1='${PS1_STR}'
-PROMPT='%{$fg_bold[green]%}%%%{$reset_color%} %{$fg[gray]%}%m%{$fg_bold[green]%}%p %{$fg_bold[white]%}%c %{$fg_bold[blue]%}%{$fg_bold[blue]%}%{$reset_color%}${vcs_info_msg_0_}'
-RPROMPT=$'%(?..%{$fg_bold[red]%}[ %? ]%{$reset_color%})'
-
-HISTFILE=~/.zsh-histfile
-HISTSIZE=10000
-SAVEHIST=10000
-
-# -------------------------------------------------------------------------------------------------------------------------
+# aliases -----------------------------------------------------------------------------------------------------------------
 if [ "$(uname)" = "Darwin" -o "$(uname)" = "FreeBSD" ]; then
     alias ls='ls -G'
 else
     alias ls='ls --color'
 fi
-alias l='ls -lFh'
+alias l='ls -laFh'
 alias less='less -R'
 export LSCOLORS=exfxcxdxcxegedabagacad
 alias grep='grep --color'
 alias bc='bc -lq'
-alias vim='~/devel/arcadia/ya vim'
+alias bz='bazelisk'
+alias vi='nvim'
 
 alias .='cd ../'
 alias ..='cd ../../'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 
-alias ccat='pygmentize -g -f console256 -O style=native'
-alias json='python -mjson.tool'
-alias xml='xmllint --format --encode utf8 --nonet -'
 alias -g L="| less"
 alias -g DD='>/dev/null'
-alias A='cd ~/devel/arcadia'
 
-alias -g math="rlwrap /Applications/Mathematica.app/Contents/MacOS/MathKernel"
-alias -g diffs="hg st | sed -nE 's/^[MARC] //p' | xargs -I {} hg di {}"
-
-alias ya='~/devel/arcadia/ya'
-
-# -------------------------------------------------------------------------------------------------------------------------
 mkcd () {
     mkdir -p "$@" && cd "$@";
 }
+# -------------------------------------------------------------------------------------------------------------------------
 
-gs() {
-    ext="*.$1"
-    str="$2"
-    shift 2
 
-    grep --color -Rn --include=$ext $str $@ .
+# git ---------------------------------------------------------------------------------------------------------------------
+
+function chpwd_update_git_vars() {
+    update_current_git_vars
 }
 
-scr() {
-    if screen -ls | grep -q Main; then
-        screen -xr Main
-    else
-        screen -S Main
+function preexec_update_git_vars() {
+    case "$2" in
+        git*|hub*|gh*|stg*)
+        __EXECUTED_GIT_COMMAND=1
+        ;;
+    esac
+}
+
+function precmd_update_git_vars() {
+    if [ -n "$__EXECUTED_GIT_COMMAND" ] || [ ! -n "$ZSH_THEME_GIT_PROMPT_CACHE" ]; then
+        update_current_git_vars
+        unset __EXECUTED_GIT_COMMAND
     fi
 }
 
-drop() {
-    # create dropbox public url for recent files
-    n=${1:-1}
-    ~/.config/generate-dropbox-pub-url.py -i 1591107 -f "$(ls -1t ~/Dropbox/Public/temp/ | head -$n | tail -1)"
+autoload -U add-zsh-hook
+add-zsh-hook chpwd chpwd_update_git_vars
+add-zsh-hook precmd precmd_update_git_vars
+add-zsh-hook preexec preexec_update_git_vars
+
+function update_current_git_vars() {
+    unset __CURRENT_GIT_STATUS
+
+    local gitstatus="$HOME/.gitstatus.py"
+    _GIT_STATUS=$(python3 ${gitstatus} 2>/dev/null)
+     __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
+    GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+    GIT_AHEAD=$__CURRENT_GIT_STATUS[2]
+    GIT_BEHIND=$__CURRENT_GIT_STATUS[3]
+    GIT_STAGED=$__CURRENT_GIT_STATUS[4]
+    GIT_CONFLICTS=$__CURRENT_GIT_STATUS[5]
+    GIT_CHANGED=$__CURRENT_GIT_STATUS[6]
+    GIT_UNTRACKED=$__CURRENT_GIT_STATUS[7]
+    GIT_STASHED=$__CURRENT_GIT_STATUS[8]
+    GIT_CLEAN=$__CURRENT_GIT_STATUS[9]
+    GIT_DELETED=$__CURRENT_GIT_STATUS[10]
+
+    # if [ -z ${ZSH_THEME_GIT_SHOW_UPSTREAM+x} ]; then
+    #     GIT_UPSTREAM=
+    # else
+    #     GIT_UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}" 2>/dev/null) && GIT_UPSTREAM="${ZSH_THEME_GIT_PROMPT_UPSTREAM_SEPARATOR}${GIT_UPSTREAM}"
+    # fi
 }
 
-# -------------------------------------------------------------------------------------------------------------------------
-export EDITOR=/usr/bin/vim
-export DEBEMAIL=rnefyodov@yandex-team.ru
-export DEBFULLNAME="Roman Nefyodov"
-export YANDEX_BUILD=~/yandex-build
-
-export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" \
-    -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
-# -------------------------------------------------------------------------------------------------------------------------
-# section for ssh key forwarding
-#
-
-if [ $(uname) = "Darwin" ]; then
-    ssh_env="$HOME/.ssh/environment"
-
-    start_agent() {
-         echo "Initialising new SSH agent..."
-         ssh-agent | sed 's/^echo/#echo/' >"${ssh_env}"
-         source "${ssh_env}"
-         ssh-add
-    }
-
-    if [ -f "${ssh_env}" ]; then
-         source "${ssh_env}"
-         [ -n "$SSH_AGENT_PID" ] && ps -p "$SSH_AGENT_PID" >/dev/null || start_agent
-    else
-         start_agent
+git_super_status() {
+    precmd_update_git_vars
+    if [ -n "$__CURRENT_GIT_STATUS" ]; then
+      STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH$GIT_UPSTREAM%{${reset_color}%}"
+      if [ "$GIT_BEHIND" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
+      fi
+      if [ "$GIT_AHEAD" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
+      fi
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+      if [ "$GIT_STAGED" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+      fi
+      if [ "$GIT_CONFLICTS" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+      fi
+      if [ "$GIT_CHANGED" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+      fi
+      if [ "$GIT_DELETED" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED%{${reset_color}%}"
+      fi
+      if [ "$GIT_UNTRACKED" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
+      fi
+      if [ "$GIT_STASHED" -ne "0" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHED$GIT_STASHED%{${reset_color}%}"
+      fi
+      if [ "$GIT_CLEAN" -eq "1" ]; then
+          STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+      fi
+      STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+      echo "$STATUS"
     fi
-fi
+}
+
+# Default values for the appearance of the prompt.
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[blue]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[blue]%}%{-%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}%{…%G%}"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%}%{⚑%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+ZSH_THEME_GIT_PROMPT_UPSTREAM_SEPARATOR="->"
+# -------------------------------------------------------------------------------------------------------------------------
+
+# PROMPT ------------------------------------------------------------------------------------------------------------------
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)%{$reset_color%}"
+local hostname="%m%p"
+local curdir="%{$fg_bold[default]%}%c%{$reset_color%}"
+PROMPT='${ret_status}${hostname}:${curdir}$(git_super_status)%{$reset_color%} '
+RPROMPT=$'%(?..%{$fg_bold[red]%}%? ↵%{$reset_color%})'
 # -------------------------------------------------------------------------------------------------------------------------
