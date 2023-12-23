@@ -176,8 +176,21 @@ ZSH_THEME_GIT_PROMPT_UPSTREAM_SEPARATOR="->"
 # -------------------------------------------------------------------------------------------------------------------------
 
 # PROMPT ------------------------------------------------------------------------------------------------------------------
+function get_hostname_abbr {
+    local hname=$(hostname | cut -d. -f1)
+
+    # fix for coder long hostname
+    if [[ $hname == coder-* ]]; then
+        local parts=("${(@s/-/)hname}")
+        echo "${parts[1]}[${parts[3]}]"
+    else
+        echo "$hname"
+    fi
+}
+
+local hostname_abbr=$(get_hostname_abbr)
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)%{$reset_color%}"
-local hostname="%m%p"
+local hostname="%(!.%F{red}.%F{default})${hostname_abbr}%{$reset_color%}"
 local curdir="%{$fg_bold[default]%}%c%{$reset_color%}"
 PROMPT='${ret_status}${hostname}:${curdir}$(git_super_status)%{$reset_color%} '
 RPROMPT=$'%(?..%{$fg_bold[red]%}%? ↵%{$reset_color%})'
