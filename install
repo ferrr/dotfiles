@@ -27,7 +27,9 @@ do_copy() {
     if [ "$TO_HOST" = localhost ]; then
         to="$HOME/$to"
         unlink "$to"
-        run_cmd ln -s "$from" "$to"
+        run_cmd cp "$from" "$to"
+#        run_cmd ln -s "$from" "$to"
+
     else
         run_cmd scp -r "$from" "$TO_HOST:$to"
     fi
