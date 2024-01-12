@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+TO_HOST=localhost
+if [ "$#" -eq 1 ]; then
+    TO_HOST="$1"
+fi
+
+run_cmd() {
+    echo "$*" >&2
+    "$@"
+}
+
+mkdirp() {
+    dir="$1"
+    if [ "$TO_HOST" = localhost ]; then
+        run_cmd mkdir -p "$HOME/$1"
+    else
+        run_cmd ssh "$TO_HOST" "mkdir -p $1"
+    fi
+}
+
+do_copy() {
+    from="$PWD/$1"
+    to="$2"
+    if [ "$TO_HOST" = localhost ]; then
+        to="$HOME/$to"
+        unlink "$to"
+        run_cmd ln -s "$from" "$to"
+    else
+        run_cmd scp -r "$from" "$TO_HOST:$to"
+    fi
+}
+
+do_copy zshrc .zshrc
+do_copy gitstatus.py .gitstatus.py
+
+mkdirp .config/nvim
+do_copy init.vim .config/nvim/init.vim
