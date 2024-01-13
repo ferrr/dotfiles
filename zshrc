@@ -68,6 +68,7 @@ alias -g DD='>/dev/null'
 mkcd () {
     mkdir -p "$@" && cd "$@";
 }
+alias coder_dotfiles='coder dotfiles git@github.com:ferrr/dotfiles.git'
 # -------------------------------------------------------------------------------------------------------------------------
 
 
