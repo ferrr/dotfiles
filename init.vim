@@ -20,6 +20,9 @@ set listchars=tab:>·,trail:· " but only show tabs and trailing whitespace
 set noswapfile               " disable creating swap file
 set backupdir=~/.cache/vim   " Directory to store backup files.
 
+" Shift-tab to insert tabs
+inoremap <S-Tab> <C-V><Tab>
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'

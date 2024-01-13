@@ -198,6 +198,6 @@ RPROMPT=$'%(?..%{$fg_bold[red]%}%? ↵%{$reset_color%})'
 # set up tab title
 precmd () {
     local hostname_abbr=$(get_hostname_abbr)
-    print -Pn "\e]0;$hostname_abbr:%c\a"
+    print -Pn "\e]0;<b>$hostname_abbr</b>:%c\a"
 }
 # -------------------------------------------------------------------------------------------------------------------------
