@@ -194,4 +194,10 @@ local hostname="%(!.%F{red}.%F{default})${hostname_abbr}%{$reset_color%}"
 local curdir="%{$fg_bold[default]%}%c%{$reset_color%}"
 PROMPT='${ret_status}${hostname}:${curdir}$(git_super_status)%{$reset_color%} '
 RPROMPT=$'%(?..%{$fg_bold[red]%}%? ↵%{$reset_color%})'
+
+# set up tab title
+precmd () {
+    local hostname_abbr=$(get_hostname_abbr)
+    print -Pn "\e]0;$hostname_abbr:%c\a"
+}
 # -------------------------------------------------------------------------------------------------------------------------
