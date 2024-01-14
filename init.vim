@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 lua << END
@@ -62,4 +63,5 @@ lua << END
        theme = 'vscode',
    }
  }
+ require('gitsigns').setup()
 END
