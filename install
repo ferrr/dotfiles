@@ -7,7 +7,7 @@ if [ "$#" -eq 1 ]; then
     TO_HOST="$1"
 fi
 
-isLocal() { [[ "$TO_HOST" == "localhost" ]]; }
+isLocal() { [ "$TO_HOST" = "localhost" ]; }
 
 run_cmd() {
     echo "$*" >&2
