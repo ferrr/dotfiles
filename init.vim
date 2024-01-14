@@ -19,9 +19,16 @@ set list                     " show invisible characters
 set listchars=tab:>·,trail:· " but only show tabs and trailing whitespace
 set noswapfile               " disable creating swap file
 set backupdir=~/.cache/vim   " Directory to store backup files.
+set termguicolors            " better colors 
 
 " Shift-tab to insert tabs
 inoremap <S-Tab> <C-V><Tab>
+
+if exists("$TMUX")
+    " try to fix background autodetection under tmux
+    " https://github.com/neovim/neovim/issues/17070#issuecomment-1086775760
+    lua vim.loop.fs_write(2, "\27Ptmux;\27\27]11;?\7\27\\", -1, nil)
+endif
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
