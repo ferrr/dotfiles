@@ -1,9 +1,7 @@
 #!/bin/sh
 
 set -e
-
-TO_HOST=localhost
-if [ "$#" -eq 1 ]; then
+TO_HOST=localhost if [ "$#" -eq 1 ]; then
     TO_HOST="$1"
 fi
 
@@ -42,8 +40,8 @@ do_copy gitstatus.py .gitstatus.py
 
 do_copy tmux.conf .tmux.conf
 
-mkdirp .config/tmux
-do_copy tmux.conf .config/tmux/tmux
+mkdirp .config/nvim
+do_copy init.vim .config/nvim/init.vim
 
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
