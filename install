@@ -7,6 +7,8 @@ if [ "$#" -eq 1 ]; then
     TO_HOST="$1"
 fi
 
+isLocal() { [[ "$TO_HOST" == "localhost" ]]; }
+
 run_cmd() {
     echo "$*" >&2
     "$@"
@@ -42,3 +44,8 @@ do_copy tmux.conf .tmux.conf
 
 mkdirp .config/tmux
 do_copy tmux.conf .config/tmux/tmux
+
+if isLocal; then
+    TPM_PATH=~/.tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm $TPM_PATH || git -C $TPM_PATH pull
+fi
