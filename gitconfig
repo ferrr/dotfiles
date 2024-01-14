@@ -1,0 +1,20 @@
+[user]
+	name = Roman Nefyodov
+	email = rnefyodov@avride.ai
+#	email = roman.nefyodov@gmail.com
+[alias]
+	p = push
+	st = status -sb
+	ll = log --oneline
+	last = log -1 HEAD --stat
+	ci = commit -m
+	di = diff
+	gl = config --global -l
+	se = !git rev-list --all | xargs git grep -F
+	co = checkout
+	br = branch
+	rv = remote -v
+[color "status"]
+	changed = blue normal bold
+	untracked = magenta
+	header = white normal dim
