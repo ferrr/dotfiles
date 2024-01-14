@@ -31,9 +31,9 @@ bindkey '^T' history-incremental-search-forward
 
 bindkey '\e.' insert-last-word
 
-bindkey '^[[H'  beginning-of-line
-bindkey '^[[F'  end-of-line
-bindkey "\e[3~" delete-char
+# bindkey '^[[H'  beginning-of-line
+# bindkey '^[[F'  end-of-line
+# bindkey "\e[3~" delete-char
 
 insert-last-command-output() {
     LBUFFER+="$(eval $history[$((HISTCMD-1))] | head -1)"
@@ -68,7 +68,14 @@ alias -g DD='>/dev/null'
 mkcd () {
     mkdir -p "$@" && cd "$@";
 }
+
 alias coder_dotfiles='coder dotfiles git@github.com:ferrr/dotfiles.git'
+
+ssh_nix_tmux() {
+    host=$1
+
+    ssh -A -t $host 'bash --login -i -c "exec nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#tmux -- new -A -s main"'
+}
 # -------------------------------------------------------------------------------------------------------------------------
 
 
