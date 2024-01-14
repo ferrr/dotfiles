@@ -1,8 +1,8 @@
 set nocompatible             " disable compatibility to old-time vi
-set showmatch                " show matching 
-set ignorecase               " case insensitive 
-set mouse=v                  " middle-click paste with 
-set hlsearch                 " highlight search 
+set showmatch                " show matching
+set ignorecase               " case insensitive
+set mouse=v                  " middle-click paste with
+set hlsearch                 " highlight search
 set incsearch                " incremental search
 set tabstop=4                " number of columns occupied by a tab 
 set softtabstop=4            " see multiple spaces as tabstops so <BS> does the right thing
@@ -19,7 +19,7 @@ set list                     " show invisible characters
 set listchars=tab:>·,trail:· " but only show tabs and trailing whitespace
 set noswapfile               " disable creating swap file
 set backupdir=~/.cache/vim   " Directory to store backup files.
-set termguicolors            " better colors 
+set termguicolors            " better colors
 
 " Shift-tab to insert tabs
 inoremap <S-Tab> <C-V><Tab>
@@ -47,6 +47,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ferrr/vscode.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
+  Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 lua << END

@@ -24,7 +24,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # key bindings ------------------------------------------------------------------------------------------------------------
-bindkey -v
+# bindkey -v
 
 bindkey '^R' history-incremental-search-backward
 bindkey '^T' history-incremental-search-forward
@@ -76,6 +76,7 @@ ssh_nix_tmux() {
 
     ssh -A -t $host 'bash --login -i -c "exec nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#tmux -- new -A -s main"'
 }
+alias ssh-nix-tmux='ssh_nix_tmux'
 # -------------------------------------------------------------------------------------------------------------------------
 
 
