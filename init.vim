@@ -25,6 +25,8 @@ set clipboard+=unnamedplus   " use system clipboard
 " Shift-tab to insert tabs
 inoremap <S-Tab> <C-V><Tab>
 
+nnoremap <C-t> :NERDTreeToggle<CR>
+
 if exists("$TMUX")
     " try to fix background autodetection under tmux
     " https://github.com/neovim/neovim/issues/17070#issuecomment-1086775760
