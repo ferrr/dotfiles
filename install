@@ -1,7 +1,9 @@
 #!/bin/sh
 
 set -e
-TO_HOST=localhost if [ "$#" -eq 1 ]; then
+
+TO_HOST=localhost
+if [ "$#" -eq 1 ]; then
     TO_HOST="$1"
 fi
 
