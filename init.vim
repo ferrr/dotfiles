@@ -18,8 +18,9 @@ set ttyfast                  " Speed up scrolling in Vim
 set list                     " show invisible characters
 set listchars=tab:>·,trail:· " but only show tabs and trailing whitespace
 set noswapfile               " disable creating swap file
-set backupdir=~/.cache/vim   " Directory to store backup files.
+set backupdir=~/.cache/vim   " Directory to store backup files
 set termguicolors            " better colors
+set clipboard+=unnamedplus   " use system clipboard
 
 " Shift-tab to insert tabs
 inoremap <S-Tab> <C-V><Tab>
