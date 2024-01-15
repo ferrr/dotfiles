@@ -7,7 +7,7 @@
 	st = status -sb
 	ll = log --oneline
 	last = log -1 HEAD --stat
-	ci = commit -m
+	ci = commit
 	di = diff
 	gl = config --global -l
 	se = !git rev-list --all | xargs git grep -F
