@@ -27,6 +27,12 @@ inoremap <S-Tab> <C-V><Tab>
 
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" pane navigation with CTRL-hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 if exists("$TMUX")
     " try to fix background autodetection under tmux
     " https://github.com/neovim/neovim/issues/17070#issuecomment-1086775760
@@ -50,7 +56,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'ferrr/vscode.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
-  Plug 'christoomey/vim-tmux-navigator'
   Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
