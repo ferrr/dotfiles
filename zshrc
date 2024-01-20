@@ -72,9 +72,7 @@ mkcd () {
 alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
 ssh_nix_tmux() {
-    host=$1
-
-    ssh -A -t $host 'bash --login -i -c "exec nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#tmux -- new -A -s main"'
+    ssh -A -t "$@" 'bash --login -i -c "exec nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#tmux -- new -A -s main"'
 }
 alias ssh-nix-tmux='ssh_nix_tmux'
 # -------------------------------------------------------------------------------------------------------------------------
@@ -191,7 +189,7 @@ function get_hostname_abbr {
     # fix for coder long hostname
     if [[ $hname == coder-* ]]; then
         local parts=("${(@s/-/)hname}")
-        echo "${parts[1]}[${parts[3]}]"
+        echo "${parts[1]}[${parts[-3]}]"
     else
         echo "$hname"
     fi
