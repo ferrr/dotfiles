@@ -69,7 +69,7 @@ mkcd () {
     mkdir -p "$@" && cd "$@";
 }
 
-alias coder_dotfiles='coder dotfiles git@github.com:ferrr/dotfiles.git'
+alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
 ssh_nix_tmux() {
     host=$1
