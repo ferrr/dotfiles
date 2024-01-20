@@ -50,6 +50,4 @@ do_copy gitconfig .gitconfig
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
     git clone https://github.com/tmux-plugins/tpm $TPM_PATH || git -C $TPM_PATH pull
-
-    rm $HOME/.bashrc  # hack for coder
 fi
