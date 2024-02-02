@@ -35,6 +35,10 @@ bindkey '^[[H'  beginning-of-line
 bindkey '^[[F'  end-of-line
 bindkey "\e[3~" delete-char
 
+# under TMUX
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+
 insert-last-command-output() {
     LBUFFER+="$(eval $history[$((HISTCMD-1))] | head -1)"
 }
