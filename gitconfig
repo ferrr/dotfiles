@@ -18,3 +18,5 @@
 	changed = blue normal bold
 	untracked = magenta
 	header = white normal dim
+[push]
+	autoSetupRemote = true
