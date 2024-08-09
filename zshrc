@@ -195,9 +195,9 @@ function get_hostname_abbr {
     local hname=$(hostname | cut -d. -f1)
 
     # fix for coder long hostname
-    if [[ $hname == coder-* ]]; then
+    if [[ "$CODER" == "true" ]]; then
         local parts=("${(@s/-/)hname}")
-        echo "${parts[1]}[${parts[-3]}]"
+        echo "coder[${parts[-1]}]"
     else
         echo "$hname"
     fi
