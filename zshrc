@@ -79,10 +79,10 @@ mkcd () {
 
 alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
-ssh_nix_tmux() {
-    ssh -A -t "$@" 'bash --login -i -c "exec nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#tmux -- new -A -s main"'
+ssh_tmux() {
+  ssh -A -t "$@" 'bash --login -i -c "exec tmux -- new -A -s main"'
 }
-alias ssh-nix-tmux='ssh_nix_tmux'
+alias ssh-tmux='ssh_tmux'
 # -------------------------------------------------------------------------------------------------------------------------
 
 
