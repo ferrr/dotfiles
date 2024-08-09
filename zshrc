@@ -15,7 +15,11 @@ setopt histignorealldups
 # Needs to be enabled for the prompt to change
 setopt prompt_subst
 
-HISTFILE=~/.zsh-histfile
+if [[ "$CODER" == "true" ]]; then
+    HISTFILE=/workspaces/.zsh-histfile
+else
+    HISTFILE=~/.zsh-histfile
+fi
 HISTSIZE=10000
 SAVEHIST=10000
 
