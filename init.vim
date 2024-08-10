@@ -57,6 +57,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
 call plug#end()
 
 lua << END
