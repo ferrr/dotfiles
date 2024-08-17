@@ -27,8 +27,6 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-
-
 source <(fzf --zsh)
 # key bindings ------------------------------------------------------------------------------------------------------------
 # bindkey -v
@@ -63,7 +61,6 @@ fi
 alias less='less -R'
 alias grep='grep --color'
 alias bc='bc -lq'
-alias bz='bazelisk'
 alias vi='nvim'
 
 alias .='cd ../'
@@ -95,6 +92,16 @@ ssh_tmux() {
 alias ssh-tmux='ssh_tmux'
 # -------------------------------------------------------------------------------------------------------------------------
 
+# bazel -------------------------------------------------------------------------------------------------------------------
+alias bz='bazelisk'
+
+bzq() {
+    bz query  --noimplicit_deps --output location --xml:line_numbers //... | \
+       fzf --delimiter=" " --with-nth=4 --preview="~/.fzf_bz_preview.sh {}" --border=none --preview-window noborder | \
+       awk -F' ' '{print $4}'
+}
+
+# -------------------------------------------------------------------------------------------------------------------------
 
 # git ---------------------------------------------------------------------------------------------------------------------
 

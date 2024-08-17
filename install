@@ -39,6 +39,7 @@ do_copy() {
 
 do_copy zshrc .zshrc
 do_copy gitstatus.py .gitstatus.py
+do_copy fzf_bz_preview.sh .fzf_bz_preview.sh
 
 do_copy tmux.conf .tmux.conf
 
