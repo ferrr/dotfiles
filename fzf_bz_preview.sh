@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash
 
 text="$1"
 file=${text%%:*}
