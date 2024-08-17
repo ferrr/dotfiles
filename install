@@ -38,6 +38,8 @@ do_copy() {
 }
 
 do_copy zshrc .zshrc
+mkdirp .zsh/completion
+do_copy _bazel .zsh/completion/_bazel
 do_copy gitstatus.py .gitstatus.py
 do_copy fzf_bz_preview.sh .fzf_bz_preview.sh
 

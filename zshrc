@@ -1,4 +1,3 @@
-autoload -U compinit && compinit
 autoload -U colors && colors
 
 setopt autocd
@@ -28,6 +27,15 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 source <(fzf --zsh)
+
+# completion __------------------------------------------------------------------------------------------------------------
+fpath[1,0]=~/.zsh/completion/
+autoload -U compinit && compinit
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+# -------------------------------------------------------------------------------------------------------------------------
+
 # key bindings ------------------------------------------------------------------------------------------------------------
 # bindkey -v
 
