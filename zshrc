@@ -28,6 +28,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 
+
 source <(fzf --zsh)
 # key bindings ------------------------------------------------------------------------------------------------------------
 # bindkey -v
@@ -59,9 +60,7 @@ if [ "$(uname)" = "Darwin" -o "$(uname)" = "FreeBSD" ]; then
 else
     alias ls='ls --color'
 fi
-alias l='ls -laFh'
 alias less='less -R'
-export LSCOLORS=exfxcxdxcxegedabagacad
 alias grep='grep --color'
 alias bc='bc -lq'
 alias bz='bazelisk'
@@ -78,6 +77,14 @@ alias -g DD='>/dev/null'
 mkcd () {
     mkdir -p "$@" && cd "$@";
 }
+
+if which eza &> /dev/null; then
+  export EZA_COLORS="xx=0:uu=0:uR=0;31:un=0;34:sn=0:ur=0:uw=0:ux=0:ue=0:gr=0:gw=0:gx=0:tr=0:tw=0:tx=0:da=0:BUILD=32"
+  alias l='eza --git -l -a'
+else
+  export LSCOLORS=exfxcxdxcxegedabagacad
+  alias l='ls -laFh'
+fi
 
 alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
@@ -182,7 +189,7 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[blue]%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{+%G%}"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[blue]%}%{-%G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
