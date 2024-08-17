@@ -81,6 +81,7 @@ mkcd () {
 if which eza &> /dev/null; then
   export EZA_COLORS="xx=0:uu=0:uR=0;31:un=0;34:sn=0:ur=0:uw=0:ux=0:ue=0:gr=0:gw=0:gx=0:tr=0:tw=0:tx=0:da=0:BUILD=32"
   alias l='eza --git -l -a'
+  alias lt='eza --tree --level=2 --long --git'
 else
   export LSCOLORS=exfxcxdxcxegedabagacad
   alias l='ls -laFh'
