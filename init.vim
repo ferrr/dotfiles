@@ -64,8 +64,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  " Plug 'junegunn/fzf.vim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
@@ -80,7 +78,17 @@ lua << END
  require('lualine').setup {
    options = {
        theme = 'vscode',
-   }
+       icons_enabled = false,
+       component_separators = '|',
+       section_separators = '',
+   },
+   sections = {
+    lualine_c = {
+      {
+        'buffers',
+      }
+    }
+  }
  }
  require('gitsigns').setup()
 END
