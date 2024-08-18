@@ -26,6 +26,7 @@ set clipboard+=unnamedplus   " use system clipboard
 inoremap <S-Tab> <C-V><Tab>
 
 nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>r :NERDTreeFind<cr>
 
 " pane navigation with CTRL-hjkl
 nnoremap <C-h> <C-w>h
@@ -63,8 +64,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf.vim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
