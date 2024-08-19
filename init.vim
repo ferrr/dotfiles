@@ -28,6 +28,8 @@ inoremap <S-Tab> <C-V><Tab>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeFind<cr>
 
+nnoremap <C-Tab> <cmd>Telescope buffers<cr>
+
 " pane navigation with CTRL-hjkl
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
