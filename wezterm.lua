@@ -2,9 +2,9 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
-local C_ACTIVE_BG = "#454459";
-local C_ACTIVE_FG = "#7dcfff";
-local C_INACTIVE_FG = "#575673";
+local C_ACTIVE_BG = "#264F78";
+local C_ACTIVE_FG = "#D4D4D4";
+local C_INACTIVE_FG = "#839496";
 
 config = {
     window_decorations = "RESIZE",
@@ -28,8 +28,8 @@ config = {
                 fg_color = C_INACTIVE_FG,
             },
             active_tab = {
-                bg_color = 'rgba(0,0,0,0)',
-                fg_color = C_INACTIVE_FG,
+                bg_color = C_ACTIVE_BG,
+                fg_color = C_ACTIVE_FG,
                 intensity = 'Bold',
             },
             inactive_tab = {
@@ -49,7 +49,18 @@ config = {
             mods = 'CTRL',
             action = wezterm.action.DisableDefaultAssignment,
         },
+        {
+            key = 'RightArrow',
+            mods = 'SUPER',
+            action = wezterm.action.ActivateTabRelative(1),
+        },
+        {
+            key = 'LeftArrow',
+            mods = 'SUPER',
+            action = wezterm.action.ActivateTabRelative(-1),
+        },
     },
+    bypass_mouse_reporting_modifiers = 'ALT',
 }
 
 wezterm.on('gui-startup', function()
@@ -66,13 +77,13 @@ function scheme_for_appearance(appearance)
 end
 
 wezterm.on('window-config-reloaded', function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  local appearance = window:get_appearance()
-  local scheme = scheme_for_appearance(appearance)
-  if overrides.color_scheme ~= scheme then
-    overrides.color_scheme = scheme
-    window:set_config_overrides(overrides)
-  end
+    local overrides = window:get_config_overrides() or {}
+    local appearance = window:get_appearance()
+    local scheme = scheme_for_appearance(appearance)
+    if overrides.color_scheme ~= scheme then
+        overrides.color_scheme = scheme
+        window:set_config_overrides(overrides)
+    end
 end)
 
 return config
