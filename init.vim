@@ -25,10 +25,8 @@ set clipboard+=unnamedplus   " use system clipboard
 " Shift-tab to insert tabs
 inoremap <S-Tab> <C-V><Tab>
 
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t> :NERDTreeToggle<cr>
 nnoremap <leader>r :NERDTreeFind<cr>
-
-nnoremap <C-Tab> <cmd>Telescope buffers<cr>
 
 " pane navigation with CTRL-hjkl
 nnoremap <C-h> <C-w>h
@@ -41,6 +39,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <C-Tab> <cmd>Telescope buffers<cr>
 
 if exists("$TMUX")
     " try to fix background autodetection under tmux
@@ -60,14 +59,15 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin('~/.vim/plugged')
+  Plug 'nvim-lua/plenary.nvim'
   Plug 'tpope/vim-sensible'
   Plug 'preservim/nerdtree'
   Plug 'ferrr/vscode.nvim'
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'numToStr/Comment.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 call plug#end()
 
 lua << END
@@ -76,6 +76,10 @@ lua << END
    transparent = true,
  })
  require('vscode').load()
+ require("toggleterm").setup({
+   direction = 'float',
+   open_mapping = [[<c-\>]],
+ })
 
  require('lualine').setup {
    options = {
