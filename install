@@ -49,6 +49,7 @@ mkdirp .config/nvim
 do_copy init.vim .config/nvim/init.vim
 
 do_copy gitconfig .gitconfig
+do_copy wezterm.lua .wezterm.lua
 
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
