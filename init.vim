@@ -68,6 +68,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 call plug#end()
 
 lua << END
@@ -80,21 +82,53 @@ lua << END
    direction = 'float',
    open_mapping = [[<c-\>]],
  })
-
+ require("bufferline").setup{
+     options = {
+         mode = 'buffers',
+         -- diagnostics = 'coc',
+         show_buffer_icons = true,
+         show_buffer_close_icons = false,
+         separator_style = { '│', '│' },
+         sort_by = 'insert_at_end',
+         offsets = {
+             {
+                     filetype = "NvimTree",
+                     text = "File Explorer",
+                     highlight = "Directory",
+                     separator = true,
+             }
+             },
+     },
+     highlights = {
+         buffer_selected = {
+             bold = true,
+             italic = false,
+         },
+         buffer_visible = { fg = "gray" },
+         background = { fg = "gray" },
+     },
+ }
  require('lualine').setup {
    options = {
        theme = 'vscode',
        icons_enabled = false,
-       component_separators = '|',
+       component_separators = '│',
        section_separators = '',
    },
-   sections = {
-    lualine_c = {
-      {
-        'buffers',
-      }
-    }
-  }
  }
  require('gitsigns').setup()
+
+ -- Keymaps
+local opts = { noremap = true, silent = true, desc = 'Go to Buffer' }
+-- vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", {})
+-- vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", {})
+vim.keymap.set('n', '<leader>1', "<cmd>lua require('bufferline').go_to_buffer(1)<CR>", opts)
+vim.keymap.set('n', '<leader>2', "<cmd>lua require('bufferline').go_to_buffer(2)<CR>", opts)
+vim.keymap.set('n', '<leader>3', "<cmd>lua require('bufferline').go_to_buffer(3)<CR>", opts)
+vim.keymap.set('n', '<leader>4', "<cmd>lua require('bufferline').go_to_buffer(4)<CR>", opts)
+vim.keymap.set('n', '<leader>5', "<cmd>lua require('bufferline').go_to_buffer(5)<CR>", opts)
+vim.keymap.set('n', '<leader>6', "<cmd>lua require('bufferline').go_to_buffer(6)<CR>", opts)
+vim.keymap.set('n', '<leader>7', "<cmd>lua require('bufferline').go_to_buffer(7)<CR>", opts)
+vim.keymap.set('n', '<leader>8', "<cmd>lua require('bufferline').go_to_buffer(8)<CR>", opts)
+vim.keymap.set('n', '<leader>9', "<cmd>lua require('bufferline').go_to_buffer(9)<CR>", opts)
 END
