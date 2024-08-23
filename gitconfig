@@ -17,6 +17,6 @@
 [color "status"]
 	changed = blue normal bold
 	untracked = magenta
-	header = white normal dim
+	header = normal dim
 [push]
 	autoSetupRemote = true
