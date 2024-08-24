@@ -14,7 +14,7 @@ config = {
     font = wezterm.font('JetBrains Mono'),
     font_size = 15,
     -- https://github.com/wez/wezterm/issues/4522
-    -- hide_tab_bar_if_only_one_tab = true,
+    hide_tab_bar_if_only_one_tab = true,
     default_cwd = '~/dev',
     use_fancy_tab_bar = false,
     tab_max_width = 96,
