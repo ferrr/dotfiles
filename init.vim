@@ -66,7 +66,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
   Plug 'nvim-tree/nvim-web-devicons'
   Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-  Plug 'github/copilot.vim',
+  Plug 'github/copilot.vim'
 call plug#end()
 
 lua << END
@@ -113,7 +113,9 @@ lua << END
        section_separators = '',
    },
  }
- require('gitsigns').setup()
+ require('gitsigns').setup {
+     current_line_blame = true,
+ }
 
  -- Keymaps
 local opts = { noremap = true, silent = true, desc = 'Go to Buffer' }
