@@ -14,9 +14,9 @@ zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 
 typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
-ZSH_HIGHLIGHT_STYLES[alias]=bold
-ZSH_HIGHLIGHT_STYLES[command]=bold
+ZSH_HIGHLIGHT_STYLES[unknown-token]=none
+ZSH_HIGHLIGHT_STYLES[alias]=fg=blue
+ZSH_HIGHLIGHT_STYLES[command]=fg=blue
 
 # -------------------------------------------------------------------------------------------------------------------------
 
