@@ -38,14 +38,14 @@ do_copy() {
 }
 
 install_nix_tools() {
-    nix profile install 'nixpkgs#tmux'
-    nix profile install 'nixpkgs#neovim'
-    nix profile install 'nixpkgs#eza'
-    nix profile install 'nixpkgs#fzf'
-    nix profile install 'nixpkgs#zoxide'
-    nix profile install 'nixpkgs#ripgrep'
-    nix profile install 'nixpkgs#git'
-    nix profile install 'nixpkgs#delta'
+    nix profile install 'nixpkgs#tmux' || true
+    nix profile install 'nixpkgs#neovim' || true
+    nix profile install 'nixpkgs#eza' || true
+    nix profile install 'nixpkgs#fzf' || true
+    nix profile install 'nixpkgs#zoxide' || true
+    nix profile install 'nixpkgs#ripgrep' || true
+    nix profile install 'nixpkgs#git' || true
+    nix profile install 'nixpkgs#delta' || true
 }
 
 do_copy zshrc .zshrc
@@ -64,7 +64,9 @@ do_copy wezterm.lua .wezterm.lua
 
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
-    git clone https://github.com/tmux-plugins/tpm $TPM_PATH || git -C $TPM_PATH pull
+    if [ ! -d "$TPM_PATH" ]; then
+        git clone https://github.com/tmux-plugins/tpm $TPM_PATH || git -C $TPM_PATH pull
+    fi
 fi
 
 install_nix_tools
