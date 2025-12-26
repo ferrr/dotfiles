@@ -1,7 +1,7 @@
 [user]
 	name = Roman Nefyodov
-	email = rnefyodov@avride.ai
-#	email = roman.nefyodov@gmail.com
+#	email = rnefyodov@avride.ai
+	email = roman.nefyodov@gmail.com
 [alias]
 	p = push
 	st = status -sb
@@ -12,6 +12,7 @@
 	gl = config --global -l
 	se = !git rev-list --all | xargs git grep -F
 	co = checkout
+	sw = switch
 	br = branch
 	rv = remote -v
 [color "status"]
@@ -20,3 +21,6 @@
 	header = normal dim
 [push]
 	autoSetupRemote = true
+[core]
+	untrackedCache = true
+	fsmonitor = true

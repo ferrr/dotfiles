@@ -37,6 +37,17 @@ do_copy() {
     fi
 }
 
+install_nix_tools() {
+    nix profile add 'nixpkgs#tmux'
+    nix profile add 'nixpkgs#neovim'
+    nix profile add 'nixpkgs#eza'
+    nix profile add 'nixpkgs#fzf'
+    nix profile add 'nixpkgs#zoxide'
+    nix profile add 'nixpkgs#ripgrep'
+    nix profile add 'nixpkgs#git'
+    nix profile add 'nixpkgs#delta'
+}
+
 do_copy zshrc .zshrc
 mkdirp .zsh/completion
 do_copy _bazel .zsh/completion/_bazel
@@ -55,3 +66,5 @@ if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
     git clone https://github.com/tmux-plugins/tpm $TPM_PATH || git -C $TPM_PATH pull
 fi
+
+install_nix_tools

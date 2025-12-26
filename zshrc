@@ -8,7 +8,7 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice depth=1
+zinit ice atload'unalias zi' depth=1
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light jeffreytse/zsh-vi-mode
@@ -50,7 +50,17 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-source <(fzf --zsh)
+if which fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
+
+if which atuin &> /dev/null; then
+    eval "$(atuin init zsh)"
+fi
+
+if which zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 
 # completion __------------------------------------------------------------------------------------------------------------
 fpath[1,0]=~/.zsh/completion/
@@ -85,15 +95,16 @@ bindkey "^K" insert-last-command-output
 # -------------------------------------------------------------------------------------------------------------------------
 
 # aliases -----------------------------------------------------------------------------------------------------------------
-if [ "$(uname)" = "Darwin" -o "$(uname)" = "FreeBSD" ]; then
-    alias ls='ls -G'
-else
-    alias ls='ls --color'
-fi
+# if [ "$(uname)" = "Darwin" -o "$(uname)" = "FreeBSD" ]; then
+#     alias ls='ls -G'
+# else
+#     alias ls='ls --color'
+# fi
 alias less='less -R'
 alias grep='grep --color'
 alias bc='bc -lq'
-alias vi='nvim'
+# alias vi='nvim'
+alias v='nvim'
 
 alias .='cd ../'
 alias ..='cd ../../'
