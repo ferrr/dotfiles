@@ -46,6 +46,7 @@ install_nix_tools() {
     nix profile install 'nixpkgs#ripgrep' || true
     nix profile install 'nixpkgs#git' || true
     nix profile install 'nixpkgs#delta' || true
+    nix profile install 'nixpkgs#atuin' || true
 }
 
 do_copy zshrc .zshrc
