@@ -134,6 +134,13 @@ fi
 
 alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
+zsh_ssh() {
+  _arr=(${@:#-*})
+  print -Pn "\e]0;$_arr\a"
+  ssh "$@"
+}
+alias ssh='zsh_ssh'
+
 ssh_tmux() {
   ssh -A -t "$@" 'bash --login -i -c "exec tmux -- new -A -s main"'
 }
