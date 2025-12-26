@@ -38,14 +38,14 @@ do_copy() {
 }
 
 install_nix_tools() {
-    nix profile add 'nixpkgs#tmux'
-    nix profile add 'nixpkgs#neovim'
-    nix profile add 'nixpkgs#eza'
-    nix profile add 'nixpkgs#fzf'
-    nix profile add 'nixpkgs#zoxide'
-    nix profile add 'nixpkgs#ripgrep'
-    nix profile add 'nixpkgs#git'
-    nix profile add 'nixpkgs#delta'
+    nix profile install 'nixpkgs#tmux'
+    nix profile install 'nixpkgs#neovim'
+    nix profile install 'nixpkgs#eza'
+    nix profile install 'nixpkgs#fzf'
+    nix profile install 'nixpkgs#zoxide'
+    nix profile install 'nixpkgs#ripgrep'
+    nix profile install 'nixpkgs#git'
+    nix profile install 'nixpkgs#delta'
 }
 
 do_copy zshrc .zshrc
