@@ -8,12 +8,29 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-zinit ice atload'unalias zi' depth=1
+# zinit ice  depth=1
+zinit ice lucid wait atload'unalias zi' depth=1
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
 zinit light jeffreytse/zsh-vi-mode
+zinit snippet OMZP::fzf
+
+# zinit light zsh-users/zsh-completions
 # zinit light zsh-users/zsh-autosuggestions
 # zinit light Aloxaf/fzf-tab
+
+# if which atuin &> /dev/null; then
+#     eval "$(atuin init zsh)"
+#     echo 123
+# fi
+#
+
+# if which fzf &> /dev/null; then
+#     source <(fzf --zsh)
+# fi
+
+if which zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[unknown-token]=none
@@ -49,18 +66,6 @@ SAVEHIST=10000
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-
-if which fzf &> /dev/null; then
-    source <(fzf --zsh)
-fi
-
-if which atuin &> /dev/null; then
-    eval "$(atuin init zsh)"
-fi
-
-if which zoxide &> /dev/null; then
-    eval "$(zoxide init zsh)"
-fi
 
 # completion __------------------------------------------------------------------------------------------------------------
 fpath[1,0]=~/.zsh/completion/

@@ -41,6 +41,7 @@ install_nix_tools() {
     nix profile install 'nixpkgs#tmux' || true
     nix profile install 'nixpkgs#neovim' || true
     nix profile install 'nixpkgs#eza' || true
+    nix profile install 'nixpkgs#bat' || true
     nix profile install 'nixpkgs#fzf' || true
     nix profile install 'nixpkgs#zoxide' || true
     nix profile install 'nixpkgs#ripgrep' || true
