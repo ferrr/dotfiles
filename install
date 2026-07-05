@@ -50,6 +50,7 @@ install_nix_tools() {
     nix profile install 'nixpkgs#git' || true
     nix profile install 'nixpkgs#delta' || true
     nix profile install 'nixpkgs#atuin' || true
+#    nix profile install 'nixpkgs#herdr' || true
 }
 
 do_copy zshrc .zshrc
@@ -67,8 +68,9 @@ do_copy gitconfig .gitconfig
 do_copy wezterm.lua .wezterm.lua
 
 do_copy herdr.conf .config/herdr/config.toml
+do_copy claude.json .claude/settings.json
 
-curl -fsSL https://herdr.dev/install.sh | sh
+curl -fsSL https://herdr.dev/install.0sh | sh
 
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
