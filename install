@@ -64,6 +64,8 @@ do_copy init.vim .config/nvim/init.vim
 do_copy gitconfig .gitconfig
 do_copy wezterm.lua .wezterm.lua
 
+do_copy herdr.conf .config/herdr/config.toml
+
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
     if [ ! -d "$TPM_PATH" ]; then
