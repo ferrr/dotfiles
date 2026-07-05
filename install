@@ -70,7 +70,7 @@ do_copy wezterm.lua .wezterm.lua
 do_copy herdr.conf .config/herdr/config.toml
 do_copy claude.json .claude/settings.json
 
-curl -fsSL https://herdr.dev/install.0sh | sh
+curl -fsSL https://herdr.dev/install.sh | sh
 
 if isLocal; then
     TPM_PATH=~/.tmux/plugins/tpm
