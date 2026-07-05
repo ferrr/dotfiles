@@ -110,8 +110,9 @@ bindkey "^K" insert-last-command-output
 alias less='less -R'
 alias grep='grep --color'
 alias bc='bc -lq'
-# alias vi='nvim'
+alias vi='nvim'
 alias v='nvim'
+
 
 alias .='cd ../'
 alias ..='cd ../../'
@@ -147,6 +148,7 @@ ssh_tmux() {
   ssh -A -t "$@" 'bash --login -i -c "exec tmux -- new -A -s main"'
 }
 alias ssh-tmux='ssh_tmux'
+alias rssh='ssh -A -X -p 2222 av-user@localhost' 
 # -------------------------------------------------------------------------------------------------------------------------
 
 # bazel -------------------------------------------------------------------------------------------------------------------

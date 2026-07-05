@@ -66,7 +66,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
   Plug 'nvim-tree/nvim-web-devicons'
   Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-  Plug 'github/copilot.vim'
+  " Plug 'github/copilot.vim'
 call plug#end()
 
 lua << END
