@@ -2,5 +2,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "theme": "auto"
 }
