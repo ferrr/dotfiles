@@ -2,6 +2,10 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "enabledPlugins": {
+    "clangd-lsp@claude-plugins-official": true
+  },
   "effortLevel": "high",
-  "theme": "auto"
+  "theme": "auto",
+  "remoteControlAtStartup": true
 }
