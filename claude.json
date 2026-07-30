@@ -7,5 +7,7 @@
   },
   "effortLevel": "high",
   "theme": "auto",
-  "remoteControlAtStartup": true
+  "tui": "fullscreen",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true
 }
