@@ -1,0 +1,18 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "bindings": [
+    {
+      "context": "Scroll",
+      "bindings": {
+        "ctrl+alt+down": "scroll:bottom"
+      }
+    },
+    {
+      "context": "Transcript",
+      "bindings": {
+        "ctrl+alt+down": "scroll:bottom"
+      }
+    }
+  ]
+}

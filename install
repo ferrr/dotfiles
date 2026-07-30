@@ -72,6 +72,7 @@ do_copy ghostty.conf .config/ghostty/config
 
 do_copy herdr.conf .config/herdr/config.toml
 do_copy claude.json .claude/settings.json
+do_copy claude-keybindings.json .claude/keybindings.json
 
 curl -fsSL https://herdr.dev/install.sh | sh
 
