@@ -70,6 +70,7 @@ do_copy wezterm.lua .wezterm.lua
 mkdirp .config/ghostty
 do_copy ghostty.conf .config/ghostty/config
 
+mkdirp .config/herdr
 do_copy herdr.conf .config/herdr/config.toml
 do_copy claude.json .claude/settings.json
 do_copy claude-keybindings.json .claude/keybindings.json
