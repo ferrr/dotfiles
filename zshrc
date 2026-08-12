@@ -135,6 +135,8 @@ else
   alias l='ls -laFh'
 fi
 
+alias di='hunk diff'
+
 alias coder_dotfiles='coder dotfiles https://github.com/ferrr/dotfiles.git'
 
 zsh_ssh() {
