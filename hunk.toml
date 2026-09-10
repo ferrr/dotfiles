@@ -1,0 +1,162 @@
+# hunk — review-first terminal diff viewer (https://github.com/modem-dev/hunk)
+#
+# Colors mirror ghostty.conf's `theme = light:Selenized Light,dark:Selenized Dark`,
+# taken from Ghostty's own Selenized palettes plus the upstream bg_2/orange/violet
+# shades that the 16-color ANSI palette doesn't expose.
+#
+# `auto` follows the terminal background, so it tracks Ghostty's light/dark switch.
+# Note it resolves to github-light-default / github-dark-default: hunk's resolver
+# short-circuits on "auto" before it looks at custom themes, so the Selenized pair
+# below is NOT what auto picks. They stay defined because they still show up in the
+# theme selector — press `t` (or View -> Themes…) to switch to one for a session,
+# or set `theme = "selenized-dark"` here to make it permanent.
+
+theme = "auto"
+
+# Match init.vim's `set tabstop=4`.
+tab_width = 4
+
+# --- Selenized Dark ----------------------------------------------------------
+[themes.selenized-dark]
+base = "solarized-dark"          # Selenized is a Solarized derivative
+label = "Selenized Dark"
+
+background = "#103c48"           # bg_0
+panel = "#184956"                # bg_1
+panelAlt = "#2d5b69"             # bg_2
+border = "#2d5b69"
+accent = "#4695f7"               # blue
+accentMuted = "#2e6da8"
+text = "#adbcbc"                 # fg_0
+muted = "#72898f"                # dim_0
+
+# Diff row tints: accent blended into bg_0 (row ~14%, changed token ~30%).
+addedBg = "#1e4e46"
+removedBg = "#314049"
+addedContentBg = "#2e6243"
+removedContentBg = "#56444a"
+movedAddedBg = "#164d56"
+movedRemovedBg = "#23455c"
+contextBg = "#103c48"
+contextContentBg = "#103c48"
+
+addedSignColor = "#75b938"       # green
+removedSignColor = "#fa5750"     # red
+lineNumberBg = "#103c48"
+lineNumberFg = "#72898f"
+selectedHunk = "#1a4c68"
+
+badgeAdded = "#75b938"
+badgeRemoved = "#fa5750"
+badgeNeutral = "#72898f"
+fileNew = "#75b938"
+fileDeleted = "#fa5750"
+fileRenamed = "#4695f7"
+fileModified = "#dbb32d"         # yellow
+fileUntracked = "#f275be"        # magenta, matching gitconfig's status.untracked
+
+noteBorder = "#af88eb"           # violet
+noteBackground = "#184956"
+noteTitleBackground = "#2d5b69"
+noteTitleText = "#cad8d9"        # fg_1
+
+[themes.selenized-dark.syntax_scopes]
+# "source" is the default-text scope; without it, unscoped tokens and
+# punctuation keep the base theme's Solarized foreground.
+"source" = "#adbcbc"
+"punctuation" = "#adbcbc"
+"comment" = "#72898f"
+"punctuation.definition.comment" = "#72898f"
+"string" = "#41c7b9"
+"string.quoted" = "#41c7b9"
+"constant.character.escape" = "#ed8649"
+"constant.numeric" = "#f275be"
+"constant.language" = "#f275be"
+"constant.other" = "#ed8649"          # orange, as Solarized does for constants
+"variable.other.constant" = "#ed8649"
+"entity.name.constant" = "#ed8649"
+"keyword" = "#75b938"
+"keyword.operator" = "#75b938"
+"storage" = "#dbb32d"
+"storage.type" = "#dbb32d"
+"entity.name.function" = "#4695f7"
+"support.function" = "#4695f7"
+"entity.name.type" = "#dbb32d"
+"entity.name.class" = "#dbb32d"
+"entity.name.tag" = "#4695f7"
+"entity.other.attribute-name" = "#dbb32d"
+"support.type" = "#dbb32d"
+"variable" = "#adbcbc"
+"variable.parameter" = "#adbcbc"
+"invalid" = "#fa5750"
+
+# --- Selenized Light ---------------------------------------------------------
+[themes.selenized-light]
+base = "solarized-light"
+label = "Selenized Light"
+
+background = "#fbf3db"           # bg_0
+panel = "#ece3cc"                # bg_1
+panelAlt = "#d5cdb6"             # bg_2
+border = "#d5cdb6"
+accent = "#0072d4"               # blue
+accentMuted = "#71acd7"
+text = "#53676d"                 # fg_0
+muted = "#909995"                # dim_0
+
+addedBg = "#e6e7c1"
+removedBg = "#f6dac6"
+addedContentBg = "#ccdaa2"
+removedContentBg = "#f0bcae"
+movedAddedBg = "#e2ead3"
+movedRemovedBg = "#efe5d9"
+contextBg = "#fbf3db"
+contextContentBg = "#fbf3db"
+
+addedSignColor = "#489100"       # green
+removedSignColor = "#d2212d"     # red
+lineNumberBg = "#fbf3db"
+lineNumberFg = "#909995"
+selectedHunk = "#d3deda"
+
+badgeAdded = "#489100"
+badgeRemoved = "#d2212d"
+badgeNeutral = "#909995"
+fileNew = "#489100"
+fileDeleted = "#d2212d"
+fileRenamed = "#0072d4"
+fileModified = "#ad8900"         # yellow
+fileUntracked = "#ca4898"        # magenta
+
+noteBorder = "#8762c6"           # violet
+noteBackground = "#ece3cc"
+noteTitleBackground = "#d5cdb6"
+noteTitleText = "#3a4d53"        # fg_1
+
+[themes.selenized-light.syntax_scopes]
+"source" = "#53676d"
+"punctuation" = "#53676d"
+"comment" = "#909995"
+"punctuation.definition.comment" = "#909995"
+"string" = "#009c8f"
+"string.quoted" = "#009c8f"
+"constant.character.escape" = "#c25d1e"
+"constant.numeric" = "#ca4898"
+"constant.language" = "#ca4898"
+"constant.other" = "#c25d1e"
+"variable.other.constant" = "#c25d1e"
+"entity.name.constant" = "#c25d1e"
+"keyword" = "#489100"
+"keyword.operator" = "#489100"
+"storage" = "#ad8900"
+"storage.type" = "#ad8900"
+"entity.name.function" = "#0072d4"
+"support.function" = "#0072d4"
+"entity.name.type" = "#ad8900"
+"entity.name.class" = "#ad8900"
+"entity.name.tag" = "#0072d4"
+"entity.other.attribute-name" = "#ad8900"
+"support.type" = "#ad8900"
+"variable" = "#53676d"
+"variable.parameter" = "#53676d"
+"invalid" = "#d2212d"
