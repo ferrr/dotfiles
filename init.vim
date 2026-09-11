@@ -132,6 +132,8 @@ vim.keymap.set('n', '<leader>8', "<cmd>lua require('bufferline').go_to_buffer(8)
 vim.keymap.set('n', '<leader>9', "<cmd>lua require('bufferline').go_to_buffer(9)<CR>", opts)
 
 
+vim.filetype.add({ extension = { nu = 'zig' } })
+
 -- Remember last cursor position
 local lastplace = vim.api.nvim_create_augroup("LastPlace", {})
 vim.api.nvim_clear_autocmds({ group = lastplace })
