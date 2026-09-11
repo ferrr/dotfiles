@@ -55,6 +55,9 @@ endif
 " Run PlugInstall if there are missing plugins autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) \| PlugInstall --sync | source $MYVIMRC \| endif
 
 call plug#begin('~/.vim/plugged')
+  if isdirectory(expand('~/dev/axonpipe/nu/editors/vim'))
+    Plug '~/dev/axonpipe/nu/editors/vim'
+  endif
   Plug 'nvim-lua/plenary.nvim'
   Plug 'tpope/vim-sensible'
   Plug 'preservim/nerdtree'
@@ -131,8 +134,6 @@ vim.keymap.set('n', '<leader>7', "<cmd>lua require('bufferline').go_to_buffer(7)
 vim.keymap.set('n', '<leader>8', "<cmd>lua require('bufferline').go_to_buffer(8)<CR>", opts)
 vim.keymap.set('n', '<leader>9', "<cmd>lua require('bufferline').go_to_buffer(9)<CR>", opts)
 
-
-vim.filetype.add({ extension = { nu = 'zig' } })
 
 -- Remember last cursor position
 local lastplace = vim.api.nvim_create_augroup("LastPlace", {})
