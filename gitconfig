@@ -24,3 +24,5 @@
 [core]
 	untrackedCache = true
 	fsmonitor = true
+[url "git@github-personal:rnfd/"]
+	insteadOf = git@github.com:rnfd/

@@ -78,6 +78,22 @@ do_copy hunk.conf .config/hunk/config.toml
 do_copy claude.json .claude/settings.json
 do_copy claude-keybindings.json .claude/keybindings.json
 
+# ssh: shared GitHub config + public keys (private keys come via agent forwarding)
+on_target() {
+    if isLocal; then
+        run_cmd sh -c "$1"
+    else
+        run_cmd ssh "$TO_HOST" "$1"
+    fi
+}
+mkdirp .ssh/config.d
+do_copy ssh/github.conf .ssh/config.d/github.conf
+for key in id_avride.pub id_gh_personal.pub; do
+    on_target "test -e ~/.ssh/$key" || do_copy "ssh/$key" ".ssh/$key"
+done
+on_target 'f=~/.ssh/config; inc="Include ~/.ssh/config.d/*.conf"; touch $f;
+    grep -qxF "$inc" $f || { { echo "$inc"; echo; cat $f; } > $f.tmp && mv $f.tmp $f; }; chmod 600 $f'
+
 curl -fsSL https://herdr.dev/install.sh | sh
 
 if isLocal; then
